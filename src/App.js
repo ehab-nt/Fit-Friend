@@ -1,22 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import WorkoutList from './components/WorkoutList';
+import PlanCreation from './components/PlanCreation';
+import WorkoutTracker from './components/WorkoutTracker';
 
 function App() {
+  const availableWorkouts = ['Push-ups', 'Squats', 'Running', 'Cycling'];
+  const [savedPlans, setSavedPlans] = useState([]);
+
+  const handleSavePlan = (newPlan) => {
+    setSavedPlans([...savedPlans, newPlan]);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Welcome to My Fitness Tracker App</h1>
+        <WorkoutList />
+        <PlanCreation availableWorkouts={availableWorkouts} onSavePlan={handleSavePlan} />
+        <WorkoutTracker savedPlans={savedPlans} />
       </header>
     </div>
   );
